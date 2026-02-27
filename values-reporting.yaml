@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reporting-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/balagcpcloud/istio-mesh-lab.git
+    targetRevision: main
+    path: istio-mesh-lab
+    helm:
+      valueFiles:
+        - values-reporting.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: reporting
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
