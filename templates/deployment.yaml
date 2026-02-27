@@ -13,9 +13,9 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-      - name: app
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        args:
-          - "-text={{ .Values.message | quote }}"
-        ports:
-        - containerPort: {{ .Values.service.targetPort }}
+        - name: app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          args:
+            - -text={{ .Values.message | quote }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
