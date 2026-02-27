@@ -1,21 +1,11 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: payments-app
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/balagcpcloud/istio-mesh-lab.git
-    targetRevision: main
-    path: istio-mesh-lab
-    helm:
-      valueFiles:
-        - values-payments.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: payments
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+replicaCount: 1
+
+image:
+  repository: hashicorp/http-echo
+  tag: "0.2.3"
+
+message: "Payment Service"
+
+service:
+  port: 80
+  targetPort: 5678
