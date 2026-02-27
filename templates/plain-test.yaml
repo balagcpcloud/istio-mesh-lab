@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: plain-test
+  namespace: reporting
+  annotations:
+    sidecar.istio.io/inject: "false"
+spec:
+  containers:
+  - name: curl
+    image: curlimages/curl
+    command: ["sleep", "3600"]
+  restartPolicy: Never
